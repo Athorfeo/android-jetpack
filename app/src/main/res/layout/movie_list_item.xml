@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+    <data>
+        <variable
+                name="clickListener"
+                type="android.view.View.OnClickListener"/>
+        <variable
+                name="viewModel"
+                type="com.obcompany.androidjetpack.ui.movie.search.SearchMovieAdapterViewModel"/>
+    </data>
+    <LinearLayout android:orientation="vertical"
+                  android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:onClick="@{clickListener}" android:paddingTop="8dp" android:paddingBottom="8dp">
+
+        <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/movie_title"
+                android:text="@{viewModel.titleString}"/>
+    </LinearLayout>
+</layout>

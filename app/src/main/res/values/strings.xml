@@ -1,0 +1,30 @@
+<resources>
+    <string name="app_name">AndroidJetpack</string>
+    <string name="text_search_movie">Search movie</string>
+    <string name="text_image_description">Image description</string>
+    <string name="results">Results</string>
+    <string name="title_search_movie_fragment">Search Movie</string>
+    <string name="title_detail_movie_fragment">Detail Movie</string>
+    <string name="title_about_fragment">About</string>
+    <string name="title_components">Components</string>
+    <string name="title_Thanks">Thanks</string>
+    <string name="title_application">Application</string>
+    <string name="title_application_year">Year</string>
+    <string name="title_version">Version</string>
+    <string name="title_author">Author</string>
+    <string name="title_author_name">Name</string>
+    <string name="title_author_nickname_github">Github nickname</string>
+
+    <string name="text_loading">Loading&#8230;</string>
+    <string name="text_title">Title</string>
+    <string name="text_overview">Overview</string>
+    <string name="text_list_components">
+        <li>Navigation</li>\n
+        <li>Databinding</li>\n
+        <li>Lifecycle</li>\n
+        <li>ViewModel</li>\n
+        <li>RxJava</li>\n
+        <li>Retrofit</li>\n
+        <li>Glide</li>
+    </string>
+</resources>
