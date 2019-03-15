@@ -1,2 +1,2 @@
 # android-jetpack
-Aplicaciñon que implementa los componenetes de arquitectura de Android
+Aplicación que implementa los componenetes de arquitectura de Android
