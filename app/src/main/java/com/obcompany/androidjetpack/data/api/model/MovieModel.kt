@@ -11,8 +11,7 @@ data class SearchMoviesResponse(
 
 data class SearchedMovie(
     @SerializedName("id") val id: Int,
-    @SerializedName("title") val title: String,
-    @SerializedName("hola") val hola: String
+    @SerializedName("title") val title: String
 )
 
 data class Movie(

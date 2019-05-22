@@ -6,7 +6,7 @@
                 type="android.view.View.OnClickListener"/>
         <variable
                 name="viewModel"
-                type="com.obcompany.androidjetpack.ui.movie.search.SearchMovieAdapterViewModel"/>
+                type="com.obcompany.androidjetpack.app.ui.movie.SearchMovieAdapterViewModel"/>
     </data>
     <LinearLayout android:orientation="vertical"
                   android:layout_width="match_parent"

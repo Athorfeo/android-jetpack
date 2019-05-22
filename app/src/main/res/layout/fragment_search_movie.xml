@@ -5,7 +5,7 @@
     <data>
         <import type="android.view.View" />
         <variable name="hasSearched" type="boolean"/>
-        <variable name="viewModel" type="com.obcompany.androidjetpack.ui.movie.search.SearchMovieViewModel"/>
+        <variable name="viewModel" type="com.obcompany.androidjetpack.app.ui.movie.SearchMovieViewModel"/>
     </data>
     <ScrollView
             tools:context="com.obcompany.androidjetpack.MainActivity"
@@ -71,10 +71,17 @@
 
             <androidx.recyclerview.widget.RecyclerView
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content" app:layout_constraintTop_toBottomOf="@+id/textSearch"
-                    app:layout_constraintEnd_toEndOf="parent" app:layout_constraintStart_toStartOf="parent"
-                    android:layout_marginStart="16dp" android:layout_marginTop="8dp" android:layout_marginEnd="16dp"
-                    android:id="@+id/recycler"/>
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toBottomOf="@+id/textSearch"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="16dp"
+                    android:id="@+id/recycler"
+                    android:clipToPadding="false"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    tools:listitem="@layout/movie_list_item"/>
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
 </layout>

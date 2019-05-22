@@ -1,7 +1,6 @@
-package com.obcompany.androidjetpack.ui.movie.search
+package com.obcompany.androidjetpack.app.ui.movie
 
 import android.os.Bundle
-import android.util.Log
 import android.view.KeyEvent
 import android.view.LayoutInflater
 import android.view.View
@@ -11,13 +10,14 @@ import androidx.lifecycle.ViewModelProviders
 import com.obcompany.androidjetpack.R
 import com.obcompany.androidjetpack.utilities.InjectionUtil
 import androidx.appcompat.app.AlertDialog
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.obcompany.androidjetpack.databinding.FragmentSearchMovieBinding
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.obcompany.androidjetpack.utilities.DialogUtil
 import android.view.inputmethod.InputMethodManager
 import android.app.Activity
+import android.util.Log
+import com.obcompany.androidjetpack.system.utility.Status
 
 class SearchMovieFragment: Fragment(), View.OnClickListener, View.OnKeyListener {
     private lateinit var binding: FragmentSearchMovieBinding
@@ -28,15 +28,9 @@ class SearchMovieFragment: Fragment(), View.OnClickListener, View.OnKeyListener 
         binding = FragmentSearchMovieBinding.inflate(inflater, container, false)
         progressDialog = DialogUtil.progress(activity!!)
 
-        val factory = InjectionUtil.provideSearchMovieViewModelFactory()
-        model = ViewModelProviders.of(this, factory).get(SearchMovieViewModel::class.java)
-        binding.viewModel = model
-        binding.buttonSearch.setOnClickListener(this)
-        binding.imageButton.setOnClickListener(this)
+        val adapter = SearchMovieAdapter()
 
-        binding.editText.setOnKeyListener(this)
-
-        init(binding)
+        init(adapter, binding)
 
         return binding.root
     }
@@ -47,7 +41,8 @@ class SearchMovieFragment: Fragment(), View.OnClickListener, View.OnKeyListener 
                 model.searchMovies(binding.editText.text.toString())
             }
             R.id.imageButton -> {
-                val direction = SearchMovieFragmentDirections.toAboutFragment()
+                val direction =
+                    SearchMovieFragmentDirections.toAboutFragment()
                 findNavController().navigate(direction)
             }
         }
@@ -71,8 +66,24 @@ class SearchMovieFragment: Fragment(), View.OnClickListener, View.OnKeyListener 
         }
     }
 
-    private fun init(binding: FragmentSearchMovieBinding){
-        model.isSearching().observe(this, Observer {
+    private fun init(adapter: SearchMovieAdapter,
+                     binding: FragmentSearchMovieBinding){
+        val factory = InjectionUtil.provideSearchMovieViewModelFactory()
+        model = ViewModelProviders.of(this, factory).get(SearchMovieViewModel::class.java)
+        binding.viewModel = model
+
+        binding.buttonSearch.setOnClickListener(this)
+        binding.imageButton.setOnClickListener(this)
+
+        binding.editText.setOnKeyListener(this)
+
+        binding.recycler.adapter = adapter
+
+        subscribeUi(adapter, binding)
+    }
+
+    private fun subscribeUi(adapter: SearchMovieAdapter, binding: FragmentSearchMovieBinding){
+        model.isLoading.observe(viewLifecycleOwner, Observer {
             if(it){
                 progressDialog.show()
             }else{
@@ -80,20 +91,24 @@ class SearchMovieFragment: Fragment(), View.OnClickListener, View.OnKeyListener 
             }
         })
 
-        model.movies.observe(this, Observer { data ->
-            binding.hasSearched = true
-            binding.textSearch.text = "${data.size} results found"
-
-            if(data.isNotEmpty()){
-                binding.recycler.apply {
-                    setHasFixedSize(true)
-                    layoutManager = LinearLayoutManager(context)
-                    adapter = SearchMovieAdapter(data, context)
-                    isNestedScrollingEnabled = false
+        model.movies.observe(viewLifecycleOwner, Observer { response ->
+            when (response?.status) {
+                Status.LOADING -> {
+                    model.setLoading(true)
                 }
-            }else{
-                binding.recycler.apply {
-                    adapter = null
+                Status.SUCCESS -> {
+                    model.setLoading(false)
+                    if(response?.data != null){
+                        binding.hasSearched = true
+                        val data = response.data.results
+                        binding.textSearch.text = "${data.size} results found"
+                        if (!data.isNullOrEmpty()) {
+                            adapter.submitList(data)
+                        }
+                    }
+                }
+                Status.ERROR -> {
+                    model.setLoading(false)
                 }
             }
         })

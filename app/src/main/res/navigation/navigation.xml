@@ -6,7 +6,7 @@
             app:startDestination="@+id/search_movie_fragment">
     <fragment
             android:id="@+id/search_movie_fragment"
-            android:name="com.obcompany.androidjetpack.ui.movie.search.SearchMovieFragment"
+            android:name="com.obcompany.androidjetpack.app.ui.movie.SearchMovieFragment"
             android:label="@string/title_search_movie_fragment"
             tools:layout="@layout/fragment_search_movie">
         <action
@@ -28,7 +28,7 @@
 
     <fragment
             android:id="@+id/detail_movie_fragment"
-            android:name="com.obcompany.androidjetpack.ui.movie.detail.DetailMovieFragment"
+            android:name="com.obcompany.androidjetpack.app.ui.movie.detail.DetailMovieFragment"
             android:label="@string/title_detail_movie_fragment"
             tools:layout="@layout/fragment_detail_movie">
         <argument
@@ -38,7 +38,7 @@
 
     <fragment
             android:id="@+id/about_fragment"
-            android:name="com.obcompany.androidjetpack.ui.about.AboutFragment"
+            android:name="com.obcompany.androidjetpack.app.ui.about.AboutFragment"
             android:label="@string/title_about_fragment"
             tools:layout="@layout/fragment_detail_movie">
     </fragment>
