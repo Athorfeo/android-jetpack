@@ -1,4 +1,4 @@
-package com.obcompany.androidjetpack.system.utility
+package com.obcompany.androidjetpack.utility
 
 enum class Status {
     SUCCESS,

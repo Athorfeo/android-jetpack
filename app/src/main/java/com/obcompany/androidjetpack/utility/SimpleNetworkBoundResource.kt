@@ -1,13 +1,11 @@
-package com.obcompany.androidjetpack.system.utility
+package com.obcompany.androidjetpack.utility
 
-import android.annotation.SuppressLint
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData
-import com.obcompany.androidjetpack.system.network.response.ApiEmptyResponse
-import com.obcompany.androidjetpack.system.network.response.ApiErrorResponse
-import com.obcompany.androidjetpack.system.network.response.ApiResponse
-import com.obcompany.androidjetpack.system.network.response.ApiSuccessResponse
+import com.obcompany.androidjetpack.system.api.response.ApiEmptyResponse
+import com.obcompany.androidjetpack.system.api.response.ApiErrorResponse
+import com.obcompany.androidjetpack.system.api.response.ApiResponse
+import com.obcompany.androidjetpack.system.api.response.ApiSuccessResponse
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable

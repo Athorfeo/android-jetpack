@@ -4,17 +4,16 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.bumptech.glide.Glide
 import com.obcompany.androidjetpack.databinding.FragmentDetailMovieBinding
-import com.obcompany.androidjetpack.utilities.DialogUtil
-import com.obcompany.androidjetpack.utilities.InjectionUtil
-import io.reactivex.android.schedulers.AndroidSchedulers
+import com.obcompany.androidjetpack.utility.Status
+import com.obcompany.androidjetpack.utility.DialogUtil
+import com.obcompany.androidjetpack.utility.ViewModelFactoryUtil
 import io.reactivex.disposables.Disposable
-import io.reactivex.schedulers.Schedulers
 
 class DetailMovieFragment: Fragment() {
     private lateinit var model: DetailMovieViewModel
@@ -27,7 +26,7 @@ class DetailMovieFragment: Fragment() {
 
         val movieId = DetailMovieFragmentArgs.fromBundle(arguments!!).movieId
 
-        val factory = InjectionUtil.provideDetailMovieViewModelFactory()
+        val factory = ViewModelFactoryUtil.provideDetailMovieFactory()
         model = ViewModelProviders.of(this, factory).get(DetailMovieViewModel::class.java)
 
         init(binding, movieId)
@@ -35,19 +34,33 @@ class DetailMovieFragment: Fragment() {
         return binding.root
     }
 
-    fun init(binding: FragmentDetailMovieBinding, movieId: Int){
-        disposable = model.searchMovie(movieId)
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe(
-                { result ->
-                    progressDialog.hide()
-                    val imageUrl = "http://image.tmdb.org/t/p/w500" + result.imagePath
-                    Toast.makeText(context, imageUrl, Toast.LENGTH_SHORT).show()
-                    binding.movie = result
-                    Glide.with(this).load(imageUrl).into(binding.imageMovie)
-                },
-                { error -> Toast.makeText(context, error.message, Toast.LENGTH_SHORT).show() }
-            )
+    private fun init(binding: FragmentDetailMovieBinding, movieId: Int){
+        model.isLoading.observe(viewLifecycleOwner, Observer {
+            if(it){
+                progressDialog.show()
+            }else{
+                progressDialog.hide()
+            }
+        })
+
+        model.searchMovie(movieId).observe(viewLifecycleOwner, Observer { response ->
+            when (response?.status) {
+                Status.LOADING -> {
+                    model.setLoading(true)
+                }
+                Status.SUCCESS -> {
+                    model.setLoading(false)
+                    if(response.data != null){
+                        val data = response.data
+                        val imageUrl = "http://image.tmdb.org/t/p/w500" + data.imagePath
+                        binding.movie = data
+                        Glide.with(this).load(imageUrl).into(binding.imageMovie)
+                    }
+                }
+                Status.ERROR -> {
+                    model.setLoading(false)
+                }
+            }
+        })
     }
 }

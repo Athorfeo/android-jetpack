@@ -8,16 +8,15 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
 import com.obcompany.androidjetpack.R
-import com.obcompany.androidjetpack.utilities.InjectionUtil
 import androidx.appcompat.app.AlertDialog
 import com.obcompany.androidjetpack.databinding.FragmentSearchMovieBinding
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
-import com.obcompany.androidjetpack.utilities.DialogUtil
+import com.obcompany.androidjetpack.utility.DialogUtil
 import android.view.inputmethod.InputMethodManager
 import android.app.Activity
-import android.util.Log
-import com.obcompany.androidjetpack.system.utility.Status
+import com.obcompany.androidjetpack.utility.Status
+import com.obcompany.androidjetpack.utility.ViewModelFactoryUtil
 
 class SearchMovieFragment: Fragment(), View.OnClickListener, View.OnKeyListener {
     private lateinit var binding: FragmentSearchMovieBinding
@@ -68,7 +67,7 @@ class SearchMovieFragment: Fragment(), View.OnClickListener, View.OnKeyListener 
 
     private fun init(adapter: SearchMovieAdapter,
                      binding: FragmentSearchMovieBinding){
-        val factory = InjectionUtil.provideSearchMovieViewModelFactory()
+        val factory = ViewModelFactoryUtil.provideSearchMovieFactory()
         model = ViewModelProviders.of(this, factory).get(SearchMovieViewModel::class.java)
         binding.viewModel = model
 
@@ -98,10 +97,10 @@ class SearchMovieFragment: Fragment(), View.OnClickListener, View.OnKeyListener 
                 }
                 Status.SUCCESS -> {
                     model.setLoading(false)
-                    if(response?.data != null){
+                    if(response.data != null){
                         binding.hasSearched = true
                         val data = response.data.results
-                        binding.textSearch.text = "${data.size} results found"
+                        binding.textSearch.text = getString(R.string.text_results_searched, data.size)
                         if (!data.isNullOrEmpty()) {
                             adapter.submitList(data)
                         }

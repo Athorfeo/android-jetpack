@@ -1,8 +1,7 @@
-package com.obcompany.androidjetpack.system.network
+package com.obcompany.androidjetpack.system.api
 
-import com.obcompany.androidjetpack.data.api.model.Movie
-import com.obcompany.androidjetpack.data.api.model.SearchMoviesResponse
-import com.obcompany.androidjetpack.system.network.service.SearchMovieService
+import com.obcompany.androidjetpack.app.model.Movie
+import com.obcompany.androidjetpack.app.model.SearchMoviesResponse
 import io.reactivex.Observable
 import retrofit2.Response
 import retrofit2.Retrofit
@@ -19,9 +18,10 @@ interface API {
                      @Query("page") page: String) : Observable<Response<SearchMoviesResponse>>
 
     @GET("3/movie/{movie_id}")
-    fun searchMovie(@Path("movie_id") movie_id: Int,
-                    @Query("api_key") apiKey: String) : Observable<Movie>
+    fun searchMovie( @Path("movie_id") movie_id: Int,
+                     @Query("api_key") apiKey: String) : Observable<Response<Movie>>
     companion object {
+        const val apiKey = "f33b50a94cda8f40e747fbca8ce620f8"
         fun create(): API{
             val retrofit = Retrofit.Builder()
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())

@@ -1,4 +1,4 @@
-package com.obcompany.androidjetpack.data
+package com.obcompany.androidjetpack.utility
 
 class Constants{
     companion object {

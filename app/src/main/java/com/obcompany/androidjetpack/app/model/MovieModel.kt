@@ -1,4 +1,4 @@
-package com.obcompany.androidjetpack.data.api.model
+package com.obcompany.androidjetpack.app.model
 
 import com.google.gson.annotations.SerializedName
 

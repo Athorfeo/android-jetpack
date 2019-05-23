@@ -1,8 +1,8 @@
-package com.obcompany.androidjetpack.system.utility
+package com.obcompany.androidjetpack.utility
 
-import  com.obcompany.androidjetpack.system.utility.Status.SUCCESS
-import  com.obcompany.androidjetpack.system.utility.Status.ERROR
-import  com.obcompany.androidjetpack.system.utility.Status.LOADING
+import  com.obcompany.androidjetpack.utility.Status.SUCCESS
+import  com.obcompany.androidjetpack.utility.Status.ERROR
+import  com.obcompany.androidjetpack.utility.Status.LOADING
 
 data class Resource<out T>(val status: Status, val data: T?, val message: String?) {
     companion object {

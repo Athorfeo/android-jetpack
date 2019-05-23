@@ -3,9 +3,9 @@ package com.obcompany.androidjetpack.app.viewmodel.movie
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.obcompany.androidjetpack.app.ui.movie.detail.DetailMovieViewModel
-import com.obcompany.androidjetpack.repository.Repository
+import com.obcompany.androidjetpack.system.repository.MovieRepository
 
-class DetailMovieViewModelFactory(private val repository: Repository) : ViewModelProvider.NewInstanceFactory() {
+class DetailMovieViewModelFactory(private val repository: MovieRepository) : ViewModelProvider.NewInstanceFactory() {
 
     @Suppress("UNCHECKED_CAST")
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {

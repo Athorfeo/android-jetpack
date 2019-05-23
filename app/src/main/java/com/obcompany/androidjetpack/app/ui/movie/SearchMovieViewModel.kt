@@ -3,10 +3,10 @@ package com.obcompany.androidjetpack.app.ui.movie
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
-import com.obcompany.androidjetpack.data.api.model.SearchMoviesResponse
+import com.obcompany.androidjetpack.app.model.SearchMoviesResponse
 import com.obcompany.androidjetpack.system.repository.MovieRepository
-import com.obcompany.androidjetpack.system.utility.Resource
-import com.obcompany.androidjetpack.utilities.BaseViewModel
+import com.obcompany.androidjetpack.utility.Resource
+import com.obcompany.androidjetpack.utility.BaseViewModel
 
 class SearchMovieViewModel(private val repository: MovieRepository): BaseViewModel() {
     private val search = MutableLiveData<String>()

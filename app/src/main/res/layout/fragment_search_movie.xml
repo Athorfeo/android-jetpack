@@ -8,7 +8,7 @@
         <variable name="viewModel" type="com.obcompany.androidjetpack.app.ui.movie.SearchMovieViewModel"/>
     </data>
     <ScrollView
-            tools:context="com.obcompany.androidjetpack.MainActivity"
+            tools:context="com.obcompany.androidjetpack.app.viewmodel.MainActivity"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:fillViewport="true">
@@ -34,7 +34,8 @@
                         android:inputType="textPersonName"
                         android:ems="10"
                         android:imeOptions="actionSearch"
-                        android:id="@+id/editText" android:layout_weight="1" android:hint="@string/text_search_movie"/>
+                        android:id="@+id/editText" android:layout_weight="1" android:hint="@string/text_search_movie"
+                        tools:ignore="Autofill"/>
                 <ImageButton
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
@@ -42,7 +43,8 @@
                         android:id="@+id/buttonSearch"
                         android:background="@android:color/transparent"
                         android:paddingEnd="16dp"
-                        android:paddingStart="16dp"/>
+                        android:paddingStart="16dp"
+                        android:contentDescription="@string/content_description"/>
             </LinearLayout>
             <ImageButton
                     android:layout_width="53dp"
@@ -50,7 +52,8 @@
                     android:id="@+id/imageButton" android:background="@drawable/background_box"
                     android:elevation="2dp" android:layout_marginTop="16dp"
                     app:layout_constraintTop_toTopOf="parent" app:layout_constraintEnd_toEndOf="parent"
-                    android:layout_marginEnd="16dp"/>
+                    android:layout_marginEnd="16dp"
+                    android:contentDescription="@string/content_description"/>
             <TextView
                     android:text="@string/results"
                     android:layout_width="wrap_content"

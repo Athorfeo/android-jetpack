@@ -1,7 +1,6 @@
-package com.obcompany.androidjetpack.utilities
+package com.obcompany.androidjetpack.utility
 
 import android.app.Activity
-import android.content.Context
 import androidx.appcompat.app.AlertDialog
 import com.obcompany.androidjetpack.R
 

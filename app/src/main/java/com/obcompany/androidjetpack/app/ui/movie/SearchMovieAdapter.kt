@@ -5,7 +5,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.obcompany.androidjetpack.data.api.model.SearchedMovie
+import com.obcompany.androidjetpack.app.model.SearchedMovie
 import com.obcompany.androidjetpack.databinding.MovieListItemBinding
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.DiffUtil
