@@ -5,7 +5,7 @@
     <data>
     </data>
     <ScrollView
-            tools:context="com.obcompany.androidjetpack.app.viewmodel.MainActivity"
+            tools:context="com.obcompany.androidjetpack.app.MainActivity"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:fillViewport="true">

@@ -1,4 +1,4 @@
-package com.obcompany.androidjetpack.utility
+package com.obcompany.androidjetpack.app.viewmodel
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

@@ -2,6 +2,7 @@ package com.obcompany.androidjetpack.utility
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import com.obcompany.androidjetpack.app.model.Resource
 import com.obcompany.androidjetpack.system.api.response.ApiEmptyResponse
 import com.obcompany.androidjetpack.system.api.response.ApiErrorResponse
 import com.obcompany.androidjetpack.system.api.response.ApiResponse

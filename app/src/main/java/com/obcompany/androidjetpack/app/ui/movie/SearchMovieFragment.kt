@@ -15,21 +15,20 @@ import androidx.navigation.fragment.findNavController
 import com.obcompany.androidjetpack.utility.DialogUtil
 import android.view.inputmethod.InputMethodManager
 import android.app.Activity
+import com.obcompany.androidjetpack.app.ui.BaseFragment
 import com.obcompany.androidjetpack.utility.Status
 import com.obcompany.androidjetpack.utility.ViewModelFactoryUtil
 
-class SearchMovieFragment: Fragment(), View.OnClickListener, View.OnKeyListener {
+class SearchMovieFragment: BaseFragment(), View.OnClickListener, View.OnKeyListener {
     private lateinit var binding: FragmentSearchMovieBinding
     private lateinit var model: SearchMovieViewModel
-    private lateinit var progressDialog: AlertDialog
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = FragmentSearchMovieBinding.inflate(inflater, container, false)
-        progressDialog = DialogUtil.progress(activity!!)
+        loadingDialog = DialogUtil.progress(activity!!)
 
         val adapter = SearchMovieAdapter()
-
-        init(adapter, binding)
+        init(adapter)
 
         return binding.root
     }
@@ -65,28 +64,25 @@ class SearchMovieFragment: Fragment(), View.OnClickListener, View.OnKeyListener 
         }
     }
 
-    private fun init(adapter: SearchMovieAdapter,
-                     binding: FragmentSearchMovieBinding){
+    private fun init(adapter: SearchMovieAdapter){
         val factory = ViewModelFactoryUtil.provideSearchMovieFactory()
         model = ViewModelProviders.of(this, factory).get(SearchMovieViewModel::class.java)
         binding.viewModel = model
+        binding.recycler.adapter = adapter
 
         binding.buttonSearch.setOnClickListener(this)
         binding.imageButton.setOnClickListener(this)
-
         binding.editText.setOnKeyListener(this)
 
-        binding.recycler.adapter = adapter
-
-        subscribeUi(adapter, binding)
+        subscribeUi(adapter)
     }
 
-    private fun subscribeUi(adapter: SearchMovieAdapter, binding: FragmentSearchMovieBinding){
+    private fun subscribeUi(adapter: SearchMovieAdapter){
         model.isLoading.observe(viewLifecycleOwner, Observer {
             if(it){
-                progressDialog.show()
+                loadingDialog.show()
             }else{
-                progressDialog.hide()
+                loadingDialog.hide()
             }
         })
 

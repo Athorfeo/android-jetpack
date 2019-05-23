@@ -1,5 +1,6 @@
-package com.obcompany.androidjetpack.utility
+package com.obcompany.androidjetpack.app.model
 
+import com.obcompany.androidjetpack.utility.Status
 import  com.obcompany.androidjetpack.utility.Status.SUCCESS
 import  com.obcompany.androidjetpack.utility.Status.ERROR
 import  com.obcompany.androidjetpack.utility.Status.LOADING

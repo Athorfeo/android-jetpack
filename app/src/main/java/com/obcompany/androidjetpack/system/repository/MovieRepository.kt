@@ -5,7 +5,7 @@ import com.obcompany.androidjetpack.app.model.Movie
 import com.obcompany.androidjetpack.app.model.SearchMoviesResponse
 import com.obcompany.androidjetpack.system.api.API
 import com.obcompany.androidjetpack.utility.SimpleNetworkBoundResource
-import com.obcompany.androidjetpack.utility.Resource
+import com.obcompany.androidjetpack.app.model.Resource
 import io.reactivex.Observable
 import io.reactivex.disposables.Disposable
 import retrofit2.Response

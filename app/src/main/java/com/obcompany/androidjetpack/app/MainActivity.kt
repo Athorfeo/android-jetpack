@@ -1,4 +1,4 @@
-package com.obcompany.androidjetpack.app.viewmodel
+package com.obcompany.androidjetpack.app
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
