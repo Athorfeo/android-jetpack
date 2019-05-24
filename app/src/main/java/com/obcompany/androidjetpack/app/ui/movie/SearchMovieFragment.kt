@@ -25,18 +25,22 @@ class SearchMovieFragment: BaseFragment(), View.OnClickListener, View.OnKeyListe
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = FragmentSearchMovieBinding.inflate(inflater, container, false)
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        model = ViewModelProviders.of(this, ViewModelFactoryUtil.provideSearchMovieFactory()).get(SearchMovieViewModel::class.java)
         loadingDialog = DialogUtil.progress(activity!!)
+        binding.recycler.visibility = View.GONE
 
         val adapter = SearchMovieAdapter()
         init(adapter)
-
-        return binding.root
     }
 
     override fun onClick(v: View?) {
         when(v?.id){
             R.id.buttonSearch -> {
-                model.searchMovies(binding.editText.text.toString())
+                searchMovie()
             }
             R.id.imageButton -> {
                 val direction =
@@ -69,6 +73,7 @@ class SearchMovieFragment: BaseFragment(), View.OnClickListener, View.OnKeyListe
         model = ViewModelProviders.of(this, factory).get(SearchMovieViewModel::class.java)
         binding.viewModel = model
         binding.recycler.adapter = adapter
+        binding.recycler.isNestedScrollingEnabled = false
 
         binding.buttonSearch.setOnClickListener(this)
         binding.imageButton.setOnClickListener(this)
@@ -98,7 +103,15 @@ class SearchMovieFragment: BaseFragment(), View.OnClickListener, View.OnKeyListe
                         val data = response.data.results
                         binding.textSearch.text = getString(R.string.text_results_searched, data.size)
                         if (!data.isNullOrEmpty()) {
+                            binding.recycler.visibility = View.VISIBLE
                             adapter.submitList(data)
+                        }else{
+                            binding.recycler.visibility = View.GONE
+                            adapter.submitList(null)
+                        }
+                    }else{
+                        if(binding.editText.text.isEmpty()){
+                            model.searchMovies(binding.editText.text.toString())
                         }
                     }
                 }
@@ -107,5 +120,11 @@ class SearchMovieFragment: BaseFragment(), View.OnClickListener, View.OnKeyListe
                 }
             }
         })
+    }
+
+    private fun searchMovie(){
+        if(!binding.editText.text.isEmpty()){
+            model.searchMovies(binding.editText.text.toString())
+        }
     }
 }

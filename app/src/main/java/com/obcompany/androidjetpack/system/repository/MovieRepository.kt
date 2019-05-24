@@ -11,14 +11,14 @@ import io.reactivex.disposables.Disposable
 import retrofit2.Response
 
 class MovieRepository: BaseRepository(){
-    fun searchMovies(search: String): LiveData<Resource<SearchMoviesResponse>> {
+    fun searchMovies(search: String, page: Int): LiveData<Resource<SearchMoviesResponse>> {
         return object : SimpleNetworkBoundResource<SearchMoviesResponse>() {
             override fun notifyDisposable(disposable: Disposable) {
                 addDisposable(disposable)
             }
 
             override fun callService(): Observable<Response<SearchMoviesResponse>> {
-                return api.searchMovies(API.apiKey, search, "1")
+                return api.searchMovies(API.apiKey, search, page.toString())
             }
         }.asLiveData()
     }

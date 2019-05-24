@@ -11,12 +11,13 @@
     <LinearLayout android:orientation="vertical"
                   android:layout_width="match_parent"
                   android:layout_height="wrap_content"
-                  android:onClick="@{clickListener}" android:paddingTop="8dp" android:paddingBottom="8dp">
+                  android:onClick="@{clickListener}" android:background="@drawable/bg_item_list">
 
         <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/movie_title"
-                android:text="@{viewModel.titleString}"/>
+                android:text="@{viewModel.titleString}" android:paddingStart="8dp" android:paddingEnd="8dp"
+                android:paddingTop="16dp" android:paddingBottom="16dp"/>
     </LinearLayout>
 </layout>

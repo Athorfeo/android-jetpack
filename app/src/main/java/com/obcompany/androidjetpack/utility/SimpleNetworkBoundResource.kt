@@ -36,7 +36,7 @@ abstract class SimpleNetworkBoundResource<T> {
                 { result ->
                     bindData(ApiResponse.create(result))
                 },
-                { error ->
+                {
                     bindData(ApiEmptyResponse())
                 }
             )

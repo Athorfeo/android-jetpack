@@ -6,11 +6,11 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.obcompany.androidjetpack.app.model.SearchedMovie
-import com.obcompany.androidjetpack.databinding.MovieListItemBinding
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import com.obcompany.androidjetpack.R
+import com.obcompany.androidjetpack.databinding.ItemListMovieBinding
 
 
 class SearchMovieAdapter: ListAdapter<SearchedMovie, SearchMovieAdapter.ViewHolder>(
@@ -21,11 +21,11 @@ class SearchMovieAdapter: ListAdapter<SearchedMovie, SearchMovieAdapter.ViewHold
         return ViewHolder(
             DataBindingUtil.inflate(
                 LayoutInflater.from(parent.context),
-                R.layout.movie_list_item, parent, false
+                R.layout.item_list_movie, parent, false
             )
         )
         //return ViewHolder(MovieListItemBinding.inflate(LayoutInflater.from(parent.context), parent, false))
-        //return ViewHolder(LayoutInflater.from(context).inflate(R.layout.movie_list_item, parent, false))
+        //return ViewHolder(LayoutInflater.from(context).inflate(R.layout.item_list_movie, parent, false))
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
@@ -45,7 +45,7 @@ class SearchMovieAdapter: ListAdapter<SearchedMovie, SearchMovieAdapter.ViewHold
         }
     }
 
-    class ViewHolder (private val binding: MovieListItemBinding) : RecyclerView.ViewHolder(binding.root){
+    class ViewHolder (private val binding: ItemListMovieBinding) : RecyclerView.ViewHolder(binding.root){
         fun bind(listener: View.OnClickListener, movie: SearchedMovie){
             with(binding) {
                 clickListener = listener
