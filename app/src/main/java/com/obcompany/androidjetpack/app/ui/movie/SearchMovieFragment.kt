@@ -47,6 +47,12 @@ class SearchMovieFragment: BaseFragment(), View.OnClickListener, View.OnKeyListe
                     SearchMovieFragmentDirections.toAboutFragment()
                 findNavController().navigate(direction)
             }
+            R.id.nextButton -> {
+                nextPage()
+            }
+            R.id.backButton -> {
+                backPage()
+            }
         }
     }
 
@@ -77,6 +83,8 @@ class SearchMovieFragment: BaseFragment(), View.OnClickListener, View.OnKeyListe
 
         binding.buttonSearch.setOnClickListener(this)
         binding.imageButton.setOnClickListener(this)
+        binding.nextButton.setOnClickListener(this)
+        binding.backButton.setOnClickListener(this)
         binding.editText.setOnKeyListener(this)
 
         subscribeUi(adapter)
@@ -123,8 +131,16 @@ class SearchMovieFragment: BaseFragment(), View.OnClickListener, View.OnKeyListe
     }
 
     private fun searchMovie(){
-        if(!binding.editText.text.isEmpty()){
+        if(binding.editText.text.isNotEmpty()){
             model.searchMovies(binding.editText.text.toString())
         }
+    }
+
+    private fun nextPage(){
+        model.nextPage()
+    }
+
+    private fun backPage(){
+        model.backPage()
     }
 }
