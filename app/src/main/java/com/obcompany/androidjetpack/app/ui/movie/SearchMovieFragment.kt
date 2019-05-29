@@ -98,7 +98,8 @@ class SearchMovieFragment: BaseFragment(), View.OnClickListener, View.OnKeyListe
         })
 
         model.page.observe(viewLifecycleOwner, Observer {
-            binding.pageText.text = it.toString()
+            val page = it ?: 1
+            binding.pageText.text = page.toString()
         })
 
         model.movies.observe(viewLifecycleOwner, Observer { response ->
@@ -112,12 +113,9 @@ class SearchMovieFragment: BaseFragment(), View.OnClickListener, View.OnKeyListe
                         binding.hasSearched = true
                         val data = response.data.results
                         binding.searchText.text = getString(R.string.text_results_searched, data.size)
-                        if (!data.isNullOrEmpty()) {
+                        if (!data.isNullOrEmpty() || data.size > 0) {
                             binding.moviesRecycler.visibility = View.VISIBLE
                             adapter.submitList(data)
-                        }else{
-                            binding.moviesRecycler.visibility = View.GONE
-                            adapter.submitList(null)
                         }
                     }else{
                         if(binding.searchEditText.text.isEmpty()){

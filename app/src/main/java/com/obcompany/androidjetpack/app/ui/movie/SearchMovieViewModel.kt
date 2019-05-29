@@ -1,5 +1,6 @@
 package com.obcompany.androidjetpack.app.ui.movie
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData
@@ -8,24 +9,50 @@ import com.obcompany.androidjetpack.app.model.SearchMoviesResponse
 import com.obcompany.androidjetpack.repository.MovieRepository
 import com.obcompany.androidjetpack.app.model.Resource
 import com.obcompany.androidjetpack.app.viewmodel.BaseViewModel
+import com.obcompany.androidjetpack.utility.Constants
+import com.obcompany.androidjetpack.utility.Status
 
 class SearchMovieViewModel(private val repository: MovieRepository): BaseViewModel() {
     private val search = MutableLiveData<String>()
 
-    private val _page = MutableLiveData<Int>().apply{value = 1}
+    private val _page = MutableLiveData<Int>().apply { value = 1 }
     val page: LiveData<Int> = _page
 
     private val _movies = MediatorLiveData<Resource<SearchMoviesResponse>>()
     val movies: LiveData<Resource<SearchMoviesResponse>> = _movies
 
     init {
-        //Search
         _movies.addSource(Transformations.switchMap(search){ search -> repository.searchMovies(search, 1) }){ data ->
+            _movies.removeSource(movies)
             _movies.value = data
             _page.value = 1
         }
-        _movies.addSource(Transformations.switchMap(page){ page -> repository.searchMovies(search.value ?: "", page) }){ data ->
-            _movies.value = data
+    }
+
+    private fun search(query: String = search.value ?: "", page: Int = _page.value ?: 1){
+        _movies.removeSource(movies)
+
+        val liveData = repository.searchMovies(query, page)
+
+        _movies.addSource(liveData){ data ->
+            when (data.status){
+                Status.LOADING -> {
+                    setLoading(true)
+                }
+                Status.SUCCESS -> {
+                    if (data.data?.results?.isNotEmpty() == true){
+                        _movies.value = data
+                    }else{
+                        setLoading(false)
+                        _movies.removeSource(liveData)
+                        _page.value = (_page.value ?: 1) - 1
+                    }
+                }
+                Status.ERROR -> {
+                    setLoading(false)
+                }
+
+            }
         }
     }
 
@@ -39,6 +66,7 @@ class SearchMovieViewModel(private val repository: MovieRepository): BaseViewMod
         if(dataIsNotEmpty()){
             val currentPage: Int = _page.value ?: 1
             _page.value = currentPage + 1
+            search()
         }
     }
 
@@ -46,6 +74,7 @@ class SearchMovieViewModel(private val repository: MovieRepository): BaseViewMod
         if(dataIsNotEmpty()){
             val currentPage: Int = _page.value ?: 1
             _page.value = if (currentPage > 1) currentPage - 1 else 1
+            search()
         }
     }
 
