@@ -30,5 +30,7 @@
     <string name="text_version">Version</string>
     <string name="text_results_searched">%1$d results found</string>
     <string name="content_description">Content Description</string>
+    <string name="btn_back">Back</string>
+    <string name="btn_next">Next</string>
 
 </resources>

@@ -5,10 +5,8 @@ import android.view.KeyEvent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
 import com.obcompany.androidjetpack.R
-import androidx.appcompat.app.AlertDialog
 import com.obcompany.androidjetpack.databinding.FragmentSearchMovieBinding
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
@@ -31,7 +29,7 @@ class SearchMovieFragment: BaseFragment(), View.OnClickListener, View.OnKeyListe
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         model = ViewModelProviders.of(this, ViewModelFactoryUtil.provideSearchMovieFactory()).get(SearchMovieViewModel::class.java)
         loadingDialog = DialogUtil.progress(activity!!)
-        binding.recycler.visibility = View.GONE
+        binding.moviesRecycler.visibility = View.GONE
 
         val adapter = SearchMovieAdapter()
         init(adapter)
@@ -39,10 +37,10 @@ class SearchMovieFragment: BaseFragment(), View.OnClickListener, View.OnKeyListe
 
     override fun onClick(v: View?) {
         when(v?.id){
-            R.id.buttonSearch -> {
+            R.id.searchButton -> {
                 searchMovie()
             }
-            R.id.imageButton -> {
+            R.id.aboutButton -> {
                 val direction =
                     SearchMovieFragmentDirections.toAboutFragment()
                 findNavController().navigate(direction)
@@ -62,9 +60,9 @@ class SearchMovieFragment: BaseFragment(), View.OnClickListener, View.OnKeyListe
                 when (keyCode){
                     KeyEvent.KEYCODE_ENTER -> {
                         val inputMethodManager = activity?.getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
-                        inputMethodManager.hideSoftInputFromWindow(binding.editText.windowToken, 0)
+                        inputMethodManager.hideSoftInputFromWindow(binding.searchEditText.windowToken, 0)
 
-                        model.searchMovies(binding.editText.text.toString())
+                        model.searchMovies(binding.searchEditText.text.toString())
                         true
                     }
                     else -> false
@@ -78,14 +76,14 @@ class SearchMovieFragment: BaseFragment(), View.OnClickListener, View.OnKeyListe
         val factory = ViewModelFactoryUtil.provideSearchMovieFactory()
         model = ViewModelProviders.of(this, factory).get(SearchMovieViewModel::class.java)
         binding.viewModel = model
-        binding.recycler.adapter = adapter
-        binding.recycler.isNestedScrollingEnabled = false
+        binding.moviesRecycler.adapter = adapter
+        binding.moviesRecycler.isNestedScrollingEnabled = false
 
-        binding.buttonSearch.setOnClickListener(this)
-        binding.imageButton.setOnClickListener(this)
+        binding.searchButton.setOnClickListener(this)
+        binding.aboutButton.setOnClickListener(this)
         binding.nextButton.setOnClickListener(this)
         binding.backButton.setOnClickListener(this)
-        binding.editText.setOnKeyListener(this)
+        binding.searchEditText.setOnKeyListener(this)
 
         subscribeUi(adapter)
     }
@@ -99,6 +97,10 @@ class SearchMovieFragment: BaseFragment(), View.OnClickListener, View.OnKeyListe
             }
         })
 
+        model.page.observe(viewLifecycleOwner, Observer {
+            binding.pageText.text = it.toString()
+        })
+
         model.movies.observe(viewLifecycleOwner, Observer { response ->
             when (response?.status) {
                 Status.LOADING -> {
@@ -109,17 +111,17 @@ class SearchMovieFragment: BaseFragment(), View.OnClickListener, View.OnKeyListe
                     if(response.data != null){
                         binding.hasSearched = true
                         val data = response.data.results
-                        binding.textSearch.text = getString(R.string.text_results_searched, data.size)
+                        binding.searchText.text = getString(R.string.text_results_searched, data.size)
                         if (!data.isNullOrEmpty()) {
-                            binding.recycler.visibility = View.VISIBLE
+                            binding.moviesRecycler.visibility = View.VISIBLE
                             adapter.submitList(data)
                         }else{
-                            binding.recycler.visibility = View.GONE
+                            binding.moviesRecycler.visibility = View.GONE
                             adapter.submitList(null)
                         }
                     }else{
-                        if(binding.editText.text.isEmpty()){
-                            model.searchMovies(binding.editText.text.toString())
+                        if(binding.searchEditText.text.isEmpty()){
+                            model.searchMovies(binding.searchEditText.text.toString())
                         }
                     }
                 }
@@ -131,8 +133,8 @@ class SearchMovieFragment: BaseFragment(), View.OnClickListener, View.OnKeyListe
     }
 
     private fun searchMovie(){
-        if(binding.editText.text.isNotEmpty()){
-            model.searchMovies(binding.editText.text.toString())
+        if(binding.searchEditText.text.isNotEmpty()){
+            model.searchMovies(binding.searchEditText.text.toString())
         }
     }
 

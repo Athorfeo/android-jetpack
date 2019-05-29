@@ -11,7 +11,9 @@ import com.obcompany.androidjetpack.app.viewmodel.BaseViewModel
 
 class SearchMovieViewModel(private val repository: MovieRepository): BaseViewModel() {
     private val search = MutableLiveData<String>()
-    private var page = MutableLiveData<Int>().apply{value = 1}
+
+    private val _page = MutableLiveData<Int>().apply{value = 1}
+    val page: LiveData<Int> = _page
 
     private val _movies = MediatorLiveData<Resource<SearchMoviesResponse>>()
     val movies: LiveData<Resource<SearchMoviesResponse>> = _movies
@@ -33,13 +35,13 @@ class SearchMovieViewModel(private val repository: MovieRepository): BaseViewMod
     }
 
     fun nextPage(){
-        val currentPage: Int = page.value ?: 1
-        page.value = currentPage + 1
+        val currentPage: Int = _page.value ?: 1
+        _page.value = currentPage + 1
     }
 
     fun backPage(){
-        val currentPage: Int = page.value ?: 1
-        page.value = if (currentPage > 1) currentPage - 1 else 1
+        val currentPage: Int = _page.value ?: 1
+        _page.value = if (currentPage > 1) currentPage - 1 else 1
     }
 
     override fun onCleared() {
