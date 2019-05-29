@@ -1,4 +1,4 @@
-package com.obcompany.androidjetpack.system.api.response
+package com.obcompany.androidjetpack.api.response
 
 import retrofit2.Response
 

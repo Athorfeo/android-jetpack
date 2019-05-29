@@ -3,10 +3,10 @@ package com.obcompany.androidjetpack.utility
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.obcompany.androidjetpack.app.model.Resource
-import com.obcompany.androidjetpack.system.api.response.ApiEmptyResponse
-import com.obcompany.androidjetpack.system.api.response.ApiErrorResponse
-import com.obcompany.androidjetpack.system.api.response.ApiResponse
-import com.obcompany.androidjetpack.system.api.response.ApiSuccessResponse
+import com.obcompany.androidjetpack.api.response.ApiEmptyResponse
+import com.obcompany.androidjetpack.api.response.ApiErrorResponse
+import com.obcompany.androidjetpack.api.response.ApiResponse
+import com.obcompany.androidjetpack.api.response.ApiSuccessResponse
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable

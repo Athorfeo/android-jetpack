@@ -1,6 +1,6 @@
-package com.obcompany.androidjetpack.system.repository
+package com.obcompany.androidjetpack.repository
 
-import com.obcompany.androidjetpack.system.api.API
+import com.obcompany.androidjetpack.api.API
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposable
 

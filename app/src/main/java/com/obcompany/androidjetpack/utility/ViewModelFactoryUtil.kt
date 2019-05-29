@@ -2,7 +2,7 @@ package com.obcompany.androidjetpack.utility
 
 import com.obcompany.androidjetpack.app.viewmodel.movie.DetailMovieViewModelFactory
 import com.obcompany.androidjetpack.app.viewmodel.movie.SearchMovieViewModelFactory
-import com.obcompany.androidjetpack.system.repository.MovieRepository
+import com.obcompany.androidjetpack.repository.MovieRepository
 
 object ViewModelFactoryUtil {
     fun provideSearchMovieFactory(): SearchMovieViewModelFactory {

@@ -2,7 +2,7 @@ package com.obcompany.androidjetpack.app.ui.movie.detail
 
 import androidx.lifecycle.LiveData
 import com.obcompany.androidjetpack.app.model.Movie
-import com.obcompany.androidjetpack.system.repository.MovieRepository
+import com.obcompany.androidjetpack.repository.MovieRepository
 import com.obcompany.androidjetpack.app.model.Resource
 import com.obcompany.androidjetpack.app.viewmodel.BaseViewModel
 

@@ -1,9 +1,9 @@
-package com.obcompany.androidjetpack.system.repository
+package com.obcompany.androidjetpack.repository
 
 import androidx.lifecycle.LiveData
 import com.obcompany.androidjetpack.app.model.Movie
 import com.obcompany.androidjetpack.app.model.SearchMoviesResponse
-import com.obcompany.androidjetpack.system.api.API
+import com.obcompany.androidjetpack.api.API
 import com.obcompany.androidjetpack.utility.SimpleNetworkBoundResource
 import com.obcompany.androidjetpack.app.model.Resource
 import io.reactivex.Observable

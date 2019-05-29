@@ -5,7 +5,7 @@ import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
 import com.obcompany.androidjetpack.app.model.SearchMoviesResponse
-import com.obcompany.androidjetpack.system.repository.MovieRepository
+import com.obcompany.androidjetpack.repository.MovieRepository
 import com.obcompany.androidjetpack.app.model.Resource
 import com.obcompany.androidjetpack.app.viewmodel.BaseViewModel
 
@@ -21,10 +21,11 @@ class SearchMovieViewModel(private val repository: MovieRepository): BaseViewMod
     init {
         //Search
         _movies.addSource(Transformations.switchMap(search){ search -> repository.searchMovies(search, 1) }){ data ->
-            _movies.setValue(data)
+            _movies.value = data
+            _page.value = 1
         }
         _movies.addSource(Transformations.switchMap(page){ page -> repository.searchMovies(search.value ?: "", page) }){ data ->
-            _movies.setValue(data)
+            _movies.value = data
         }
     }
 
@@ -35,13 +36,25 @@ class SearchMovieViewModel(private val repository: MovieRepository): BaseViewMod
     }
 
     fun nextPage(){
-        val currentPage: Int = _page.value ?: 1
-        _page.value = currentPage + 1
+        if(dataIsNotEmpty()){
+            val currentPage: Int = _page.value ?: 1
+            _page.value = currentPage + 1
+        }
     }
 
     fun backPage(){
-        val currentPage: Int = _page.value ?: 1
-        _page.value = if (currentPage > 1) currentPage - 1 else 1
+        if(dataIsNotEmpty()){
+            val currentPage: Int = _page.value ?: 1
+            _page.value = if (currentPage > 1) currentPage - 1 else 1
+        }
+    }
+
+    private fun dataIsNotEmpty(): Boolean{
+        var boolean = false
+        movies.value?.let{
+            boolean = it.data?.results?.size ?: 0 > 0
+        }
+        return boolean
     }
 
     override fun onCleared() {

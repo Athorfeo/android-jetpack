@@ -1,4 +1,4 @@
-package com.obcompany.androidjetpack.system.api.service
+package com.obcompany.androidjetpack.api.service
 
 import com.obcompany.androidjetpack.app.model.Movie
 import com.obcompany.androidjetpack.app.model.SearchMoviesResponse
