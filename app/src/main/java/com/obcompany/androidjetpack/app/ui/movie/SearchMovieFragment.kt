@@ -116,6 +116,9 @@ class SearchMovieFragment: BaseFragment(), View.OnClickListener, View.OnKeyListe
                         if (!data.isNullOrEmpty() || data.size > 0) {
                             binding.moviesRecycler.visibility = View.VISIBLE
                             adapter.submitList(data)
+                        }else{
+                            binding.moviesRecycler.visibility = View.GONE
+                            adapter.submitList(null)
                         }
                     }else{
                         if(binding.searchEditText.text.isEmpty()){
