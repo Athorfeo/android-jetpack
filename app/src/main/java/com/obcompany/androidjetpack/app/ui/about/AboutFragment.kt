@@ -1,15 +1,21 @@
 package com.obcompany.androidjetpack.app.ui.about
 
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
+import androidx.core.app.ActivityCompat.invalidateOptionsMenu
 import androidx.fragment.app.Fragment
 import com.obcompany.androidjetpack.databinding.FragmentAboutBinding
 import com.obcompany.androidjetpack.BuildConfig
+import com.obcompany.androidjetpack.R
+import kotlinx.android.synthetic.main.activity_main.*
 
 
 class AboutFragment: Fragment() {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setHasOptionsMenu(true)
+    }
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val binding = FragmentAboutBinding.inflate(inflater, container, false)
 
@@ -20,5 +26,10 @@ class AboutFragment: Fragment() {
         binding.textAuthorGithubNickname.text = "@Athorfeo"
 
         return binding.root
+    }
+
+    override fun onPrepareOptionsMenu(menu: Menu) {
+        super.onPrepareOptionsMenu(menu)
+        menu.clear()
     }
 }

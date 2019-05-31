@@ -1,10 +1,6 @@
 package com.obcompany.androidjetpack.app.ui.movie
 
 import android.os.Bundle
-import android.view.KeyEvent
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProviders
 import com.obcompany.androidjetpack.R
 import com.obcompany.androidjetpack.databinding.FragmentSearchMovieBinding
@@ -13,9 +9,11 @@ import androidx.navigation.fragment.findNavController
 import com.obcompany.androidjetpack.utility.DialogUtil
 import android.view.inputmethod.InputMethodManager
 import android.app.Activity
+import android.view.*
 import com.obcompany.androidjetpack.app.ui.BaseFragment
 import com.obcompany.androidjetpack.utility.Status
 import com.obcompany.androidjetpack.utility.ViewModelFactoryUtil
+import kotlinx.android.synthetic.main.activity_main.*
 
 class SearchMovieFragment: BaseFragment(), View.OnClickListener, View.OnKeyListener {
     private lateinit var binding: FragmentSearchMovieBinding
@@ -103,32 +101,16 @@ class SearchMovieFragment: BaseFragment(), View.OnClickListener, View.OnKeyListe
         })
 
         model.movies.observe(viewLifecycleOwner, Observer { response ->
-            when (response?.status) {
-                Status.LOADING -> {
-                    model.setLoading(true)
-                }
-                Status.SUCCESS -> {
-                    model.setLoading(false)
-                    if(response.data != null){
-                        binding.hasSearched = true
-                        val data = response.data.results
-                        binding.searchText.text = getString(R.string.text_results_searched, data.size)
-                        if (!data.isNullOrEmpty() || data.size > 0) {
-                            binding.moviesRecycler.visibility = View.VISIBLE
-                            adapter.submitList(data)
-                        }else{
-                            binding.moviesRecycler.visibility = View.GONE
-                            adapter.submitList(null)
-                        }
-                    }else{
-                        if(binding.searchEditText.text.isEmpty()){
-                            model.searchMovies(binding.searchEditText.text.toString())
-                        }
-                    }
-                }
-                Status.ERROR -> {
-                    model.setLoading(false)
-                }
+            binding.hasSearched = true
+            val data = response.results
+            binding.searchText.text = getString(R.string.text_results_searched, data.size)
+
+            if (!data.isNullOrEmpty() || data.size > 0) {
+                binding.moviesRecycler.visibility = View.VISIBLE
+                adapter.submitList(data)
+            }else{
+                binding.moviesRecycler.visibility = View.GONE
+                adapter.submitList(null)
             }
         })
     }
