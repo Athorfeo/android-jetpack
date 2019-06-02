@@ -2,20 +2,12 @@ package com.obcompany.androidjetpack.app.ui.about
 
 import android.os.Bundle
 import android.view.*
-import androidx.core.app.ActivityCompat.invalidateOptionsMenu
-import androidx.fragment.app.Fragment
 import com.obcompany.androidjetpack.databinding.FragmentAboutBinding
 import com.obcompany.androidjetpack.BuildConfig
-import com.obcompany.androidjetpack.R
-import kotlinx.android.synthetic.main.activity_main.*
+import com.obcompany.androidjetpack.app.ui.SimpleFragment
 
 
-class AboutFragment: Fragment() {
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setHasOptionsMenu(true)
-    }
-
+class AboutFragment: SimpleFragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val binding = FragmentAboutBinding.inflate(inflater, container, false)
 
@@ -28,8 +20,4 @@ class AboutFragment: Fragment() {
         return binding.root
     }
 
-    override fun onPrepareOptionsMenu(menu: Menu) {
-        super.onPrepareOptionsMenu(menu)
-        menu.clear()
-    }
 }
