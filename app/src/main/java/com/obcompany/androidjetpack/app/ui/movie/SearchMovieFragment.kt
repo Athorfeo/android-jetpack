@@ -6,13 +6,11 @@ import com.obcompany.androidjetpack.R
 import com.obcompany.androidjetpack.databinding.FragmentSearchMovieBinding
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
-import com.obcompany.androidjetpack.utility.DialogUtil
 import android.view.inputmethod.InputMethodManager
 import android.app.Activity
 import android.view.*
 import com.obcompany.androidjetpack.app.ui.BaseFragment
-import com.obcompany.androidjetpack.utility.Status
-import com.obcompany.androidjetpack.utility.ViewModelFactoryUtil
+import com.obcompany.androidjetpack.utility.*
 import kotlinx.android.synthetic.main.activity_main.*
 
 class SearchMovieFragment: BaseFragment(), View.OnClickListener, View.OnKeyListener {
@@ -37,11 +35,6 @@ class SearchMovieFragment: BaseFragment(), View.OnClickListener, View.OnKeyListe
         when(v?.id){
             R.id.searchButton -> {
                 searchMovie()
-            }
-            R.id.aboutButton -> {
-                val direction =
-                    SearchMovieFragmentDirections.toAboutFragment()
-                findNavController().navigate(direction)
             }
             R.id.nextButton -> {
                 nextPage()
@@ -78,7 +71,6 @@ class SearchMovieFragment: BaseFragment(), View.OnClickListener, View.OnKeyListe
         binding.moviesRecycler.isNestedScrollingEnabled = false
 
         binding.searchButton.setOnClickListener(this)
-        binding.aboutButton.setOnClickListener(this)
         binding.nextButton.setOnClickListener(this)
         binding.backButton.setOnClickListener(this)
         binding.searchEditText.setOnKeyListener(this)
@@ -116,7 +108,7 @@ class SearchMovieFragment: BaseFragment(), View.OnClickListener, View.OnKeyListe
     }
 
     private fun searchMovie(){
-        if(binding.searchEditText.text.isNotEmpty()){
+        if(validate()){
             model.searchMovies(binding.searchEditText.text.toString())
         }
     }
@@ -127,5 +119,22 @@ class SearchMovieFragment: BaseFragment(), View.OnClickListener, View.OnKeyListe
 
     private fun backPage(){
         model.backPage()
+    }
+
+    private fun validate(): Boolean {
+        var isCorrect = true
+        when {
+            binding.searchEditText.text.isEmpty() -> {
+                isCorrect = false
+                SnackbarUtil.default(binding.root, "El campo de texto no puede ser vacio")
+            }
+            context?.let {
+                !NetworkUtil.isOnline(it)
+            } ?: false -> {
+                isCorrect = false
+                SnackbarUtil.default(binding.root, "No hay conextión a internet")
+            }
+        }
+        return isCorrect
     }
 }

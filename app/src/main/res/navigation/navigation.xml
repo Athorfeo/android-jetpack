@@ -4,6 +4,7 @@
             xmlns:tools="http://schemas.android.com/tools"
             android:id="@+id/mobile_navigation"
             app:startDestination="@+id/search_movie_fragment">
+    <!-- Global Actions  -->
 
     <fragment
             android:id="@+id/search_movie_fragment"
@@ -13,14 +14,6 @@
         <action
                 android:id="@+id/to_detail_movie_fragment"
                 app:destination="@+id/detail_movie_fragment"
-                app:enterAnim="@anim/slide_in_right"
-                app:exitAnim="@anim/slide_out_left"
-                app:popEnterAnim="@anim/slide_in_left"
-                app:popExitAnim="@anim/slide_out_right" />
-
-        <action
-                android:id="@+id/to_about_fragment"
-                app:destination="@+id/about_fragment"
                 app:enterAnim="@anim/slide_in_right"
                 app:exitAnim="@anim/slide_out_left"
                 app:popEnterAnim="@anim/slide_in_left"
@@ -43,5 +36,11 @@
             android:label="@string/title_about_fragment"
             tools:layout="@layout/fragment_detail_movie">
     </fragment>
+
+    <!-- Example Section -->
+    <fragment   android:id="@+id/example_fragment"
+                android:name="com.obcompany.androidjetpack.app.ui.example.ExampleFragment"
+                android:label="@string/title_example_fragment"
+                tools:layout="@layout/fragment_example"/>
 
 </navigation>

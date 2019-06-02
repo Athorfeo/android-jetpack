@@ -1,0 +1,22 @@
+package com.obcompany.androidjetpack.utility
+
+import android.graphics.Color
+import android.view.View
+import android.widget.TextView
+import com.google.android.material.snackbar.Snackbar
+import com.obcompany.androidjetpack.R
+
+class SnackbarUtil {
+    companion object{
+        @JvmStatic
+        fun default(view: View, message: String){
+            val snackbar = Snackbar.make(view, message, Snackbar.LENGTH_SHORT)
+            /*val snackbarView = snackbar.view
+
+            snackbarView.findViewById<TextView>(R.id.snackbar_text).setTextColor(Color.LTGRAY)
+            snackbarView.setBackgroundColor(Color.WHITE)*/
+
+            snackbar.show()
+        }
+    }
+}
