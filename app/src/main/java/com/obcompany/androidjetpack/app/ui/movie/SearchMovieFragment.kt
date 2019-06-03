@@ -8,10 +8,14 @@ import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import android.view.inputmethod.InputMethodManager
 import android.app.Activity
+import android.util.Log
 import android.view.*
 import com.obcompany.androidjetpack.app.ui.BaseFragment
 import com.obcompany.androidjetpack.utility.*
 import kotlinx.android.synthetic.main.activity_main.*
+import com.google.android.material.snackbar.Snackbar
+
+
 
 class SearchMovieFragment: BaseFragment(), View.OnClickListener, View.OnKeyListener {
     private lateinit var binding: FragmentSearchMovieBinding

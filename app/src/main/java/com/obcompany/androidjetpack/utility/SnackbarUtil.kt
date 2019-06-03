@@ -3,6 +3,7 @@ package com.obcompany.androidjetpack.utility
 import android.graphics.Color
 import android.view.View
 import android.widget.TextView
+import com.google.android.material.snackbar.ContentViewCallback
 import com.google.android.material.snackbar.Snackbar
 import com.obcompany.androidjetpack.R
 
@@ -16,6 +17,13 @@ class SnackbarUtil {
             snackbarView.findViewById<TextView>(R.id.snackbar_text).setTextColor(Color.LTGRAY)
             snackbarView.setBackgroundColor(Color.WHITE)*/
 
+            snackbar.show()
+        }
+
+        @JvmStatic
+        fun action(view: View, message: String, action: String, listener: (View) -> Unit){
+            val snackbar = Snackbar.make(view, message, Snackbar.LENGTH_LONG)
+            snackbar.setAction(action,  listener)
             snackbar.show()
         }
     }

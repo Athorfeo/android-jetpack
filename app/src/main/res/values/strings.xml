@@ -34,10 +34,13 @@
     </string>
     <string name="text_version">Version</string>
     <string name="text_results_searched">%1$d results found</string>
+    <string name="text_developed_by">Developed by</string>
+    <string name="author">\@Athorfeo</string>
 
     <!-- Menu -->
     <string name="menu_search">Search</string>
     <string name="menu_example">Example Fragment</string>
+    <string name="menu_about">About</string>
 
     <!-- Content -->
     <string name="image_description">Content Description</string>

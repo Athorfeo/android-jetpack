@@ -1,9 +1,19 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-    <group android:checkableBehavior="single">
-        <item   android:id="@+id/search_movie_fragment"
-                android:title="@string/menu_search"/>
-        <item   android:id="@+id/example_fragment"
-                android:title="@string/menu_example"/>
+    <group android:checkableBehavior="single"
+        android:id="@+id/menu_section_1">
+            <item   android:id="@+id/search_movie_fragment"
+                    android:icon="@drawable/ic_search"
+                    android:title="@string/menu_search"/>
+            <item   android:id="@+id/example_fragment"
+                    android:icon="@drawable/ic_info"
+                    android:title="@string/menu_example"/>
+    </group>
+
+    <group android:checkableBehavior="none"
+           android:id="@+id/menu_section_2">
+        <item   android:id="@+id/about_fragment"
+                android:icon="@drawable/ic_search"
+                android:title="@string/menu_about"/>
     </group>
 
 </menu>
