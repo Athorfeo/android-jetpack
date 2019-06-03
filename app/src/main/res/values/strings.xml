@@ -39,7 +39,11 @@
 
     <!-- Menu -->
     <string name="menu_search">Search</string>
+    <string name="menu_daily">Daily - Room</string>
     <string name="menu_example">Example Fragment</string>
+    <string name="menu_activity">Example Activity</string>
+    <string name="menu_location">Location</string>
+    <string name="menu_fingerprint">Fingerprint</string>
     <string name="menu_about">About</string>
 
     <!-- Content -->

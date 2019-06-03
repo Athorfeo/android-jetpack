@@ -4,16 +4,33 @@
             <item   android:id="@+id/search_movie_fragment"
                     android:icon="@drawable/ic_search"
                     android:title="@string/menu_search"/>
-            <item   android:id="@+id/example_fragment"
-                    android:icon="@drawable/ic_info"
-                    android:title="@string/menu_example"/>
-    </group>
 
+            <item   android:id="@+id/search_daily_fragment"
+                    android:icon="@drawable/ic_book"
+                    android:title="@string/menu_daily"/>
+    </group>
     <group android:checkableBehavior="none"
            android:id="@+id/menu_section_2">
+        <item   android:id="@+id/example_fragment"
+                android:icon="@drawable/ic_phone_android"
+                android:title="@string/menu_example"/>
+
+        <item   android:id="@+id/example_activity"
+                android:icon="@drawable/ic_phone_android"
+                android:title="@string/menu_activity"/>
+
+        <item   android:id="@+id/location_fragment"
+                android:icon="@drawable/ic_location"
+                android:title="@string/menu_location"/>
+
+        <item   android:id="@+id/fingerprint_fragment"
+                android:icon="@drawable/ic_fingerprint"
+                android:title="@string/menu_fingerprint"/>
+    </group>
+    <group android:checkableBehavior="none"
+           android:id="@+id/menu_section_3">
         <item   android:id="@+id/about_fragment"
-                android:icon="@drawable/ic_search"
+                android:icon="@drawable/ic_info"
                 android:title="@string/menu_about"/>
     </group>
-
 </menu>
