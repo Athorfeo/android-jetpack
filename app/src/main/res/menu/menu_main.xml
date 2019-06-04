@@ -9,7 +9,7 @@
                     android:icon="@drawable/ic_book"
                     android:title="@string/menu_daily"/>
     </group>
-    <group android:checkableBehavior="none"
+    <group android:checkableBehavior="single"
            android:id="@+id/menu_section_2">
         <item   android:id="@+id/example_fragment"
                 android:icon="@drawable/ic_phone_android"
