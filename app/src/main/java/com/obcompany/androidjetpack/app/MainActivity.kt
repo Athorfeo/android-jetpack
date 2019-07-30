@@ -9,7 +9,7 @@ import android.view.MenuItem
 import androidx.core.view.GravityCompat
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.NavController
-import androidx.navigation.Navigation
+import androidx.navigation.Navigation.findNavController
 import androidx.navigation.ui.*
 import com.google.android.material.navigation.NavigationView
 import com.obcompany.androidjetpack.R
@@ -26,7 +26,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             R.layout.activity_main
         )
 
-        navController = Navigation.findNavController(this, R.id.nav_host_fragment)
+        navController = findNavController(this, R.id.nav_host_fragment)
 
         val topLevelDestinations = setOf(
             R.id.search_movie_fragment,

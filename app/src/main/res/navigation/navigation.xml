@@ -2,7 +2,7 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
             xmlns:app="http://schemas.android.com/apk/res-auto"
             xmlns:tools="http://schemas.android.com/tools"
-            android:id="@+id/mobile_navigation"
+            android:id="@+id/navigation"
             app:startDestination="@+id/search_movie_fragment">
     <!-- Global Actions  -->
 
@@ -18,11 +18,12 @@
                 app:exitAnim="@anim/slide_out_left"
                 app:popEnterAnim="@anim/slide_in_left"
                 app:popExitAnim="@anim/slide_out_right" />
+        <deepLink app:uri="http://www.example.com/users/{id}"/>
     </fragment>
 
     <fragment
             android:id="@+id/detail_movie_fragment"
-            android:name="com.obcompany.androidjetpack.app.ui.movie.detail.DetailMovieFragment"
+            android:name="com.obcompany.androidjetpack.app.ui.movie.detail.DetailMovieBaseFragment"
             android:label="@string/title_detail_movie_fragment"
             tools:layout="@layout/fragment_detail_movie">
         <argument
@@ -32,7 +33,7 @@
 
     <fragment
             android:id="@+id/about_fragment"
-            android:name="com.obcompany.androidjetpack.app.ui.about.AboutFragment"
+            android:name="com.obcompany.androidjetpack.app.ui.about.AboutBaseFragment"
             android:label="@string/title_about_fragment"
             tools:layout="@layout/fragment_detail_movie">
     </fragment>
@@ -41,6 +42,7 @@
     <fragment   android:id="@+id/example_fragment"
                 android:name="com.obcompany.androidjetpack.app.ui.example.ExampleFragment"
                 android:label="@string/title_example_fragment"
-                tools:layout="@layout/fragment_example"/>
+                tools:layout="@layout/fragment_example">
+    </fragment>
 
 </navigation>

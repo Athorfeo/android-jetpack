@@ -5,16 +5,15 @@ import androidx.lifecycle.ViewModelProviders
 import com.obcompany.androidjetpack.R
 import com.obcompany.androidjetpack.databinding.FragmentSearchMovieBinding
 import androidx.lifecycle.Observer
-import androidx.navigation.fragment.findNavController
 import android.view.inputmethod.InputMethodManager
 import android.app.Activity
 import android.util.Log
 import android.view.*
-import com.obcompany.androidjetpack.app.ui.BaseFragment
+import androidx.navigation.Navigation
+import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
+import com.obcompany.androidjetpack.utility.base.BaseFragment
 import com.obcompany.androidjetpack.utility.*
-import kotlinx.android.synthetic.main.activity_main.*
-import com.google.android.material.snackbar.Snackbar
-
 
 
 class SearchMovieFragment: BaseFragment(), View.OnClickListener, View.OnKeyListener {
@@ -33,12 +32,21 @@ class SearchMovieFragment: BaseFragment(), View.OnClickListener, View.OnKeyListe
 
         val adapter = SearchMovieAdapter()
         init(adapter)
+
+        val intent = activity?.intent?.data
+
+        Log.i(Constants.LOG_I, "Data: ${intent.toString()}")
+
+        /*Navigation.findNavController(view)
+            .createDeepLink()
+            .setDestination(R.id.search_movie_fragment)
+            .createPendingIntent()*/
     }
 
     override fun onClick(v: View?) {
         when(v?.id){
             R.id.searchButton -> {
-                searchMovie()
+                //searchMovie()
             }
             R.id.nextButton -> {
                 nextPage()

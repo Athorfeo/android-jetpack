@@ -1,9 +1,9 @@
-package com.obcompany.androidjetpack.app.ui
+package com.obcompany.androidjetpack.utility.base
 
 import android.os.Bundle
 import android.view.Menu
 
-open class SimpleFragment: BaseFragment() {
+open class SimpleBaseFragment: BaseFragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setHasOptionsMenu(true)

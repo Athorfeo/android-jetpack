@@ -7,7 +7,7 @@ import androidx.lifecycle.Transformations
 import com.obcompany.androidjetpack.app.model.SearchMoviesResponse
 import com.obcompany.androidjetpack.repository.MovieRepository
 import com.obcompany.androidjetpack.app.model.Resource
-import com.obcompany.androidjetpack.app.viewmodel.BaseViewModel
+import com.obcompany.androidjetpack.utility.base.BaseViewModel
 import com.obcompany.androidjetpack.utility.Status
 
 class SearchMovieViewModel(private val repository: MovieRepository): BaseViewModel() {

@@ -1,4 +1,4 @@
-package com.obcompany.androidjetpack.app.ui
+package com.obcompany.androidjetpack.utility.base
 
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment

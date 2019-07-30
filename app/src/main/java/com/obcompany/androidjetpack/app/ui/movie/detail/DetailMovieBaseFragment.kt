@@ -4,27 +4,23 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.appcompat.app.AlertDialog
-import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.bumptech.glide.Glide
-import com.obcompany.androidjetpack.app.ui.BaseFragment
-import com.obcompany.androidjetpack.app.ui.SimpleFragment
+import com.obcompany.androidjetpack.utility.base.SimpleBaseFragment
 import com.obcompany.androidjetpack.databinding.FragmentDetailMovieBinding
 import com.obcompany.androidjetpack.utility.Status
 import com.obcompany.androidjetpack.utility.DialogUtil
 import com.obcompany.androidjetpack.utility.ViewModelFactoryUtil
-import io.reactivex.disposables.Disposable
 
-class DetailMovieFragment: SimpleFragment() {
+class DetailMovieBaseFragment: SimpleBaseFragment() {
     private lateinit var model: DetailMovieViewModel
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val binding = FragmentDetailMovieBinding.inflate(inflater, container, false)
         loadingDialog = DialogUtil.progress(activity!!)
 
-        val movieId = DetailMovieFragmentArgs.fromBundle(arguments!!).movieId
+        val movieId = DetailMovieBaseFragmentArgs.fromBundle(arguments!!).movieId
         val factory = ViewModelFactoryUtil.provideDetailMovieFactory()
         model = ViewModelProviders.of(this, factory).get(DetailMovieViewModel::class.java)
 

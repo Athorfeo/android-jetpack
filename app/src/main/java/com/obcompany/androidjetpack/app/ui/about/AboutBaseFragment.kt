@@ -4,10 +4,10 @@ import android.os.Bundle
 import android.view.*
 import com.obcompany.androidjetpack.databinding.FragmentAboutBinding
 import com.obcompany.androidjetpack.BuildConfig
-import com.obcompany.androidjetpack.app.ui.SimpleFragment
+import com.obcompany.androidjetpack.utility.base.SimpleBaseFragment
 
 
-class AboutFragment: SimpleFragment() {
+class AboutBaseFragment: SimpleBaseFragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val binding = FragmentAboutBinding.inflate(inflater, container, false)
 

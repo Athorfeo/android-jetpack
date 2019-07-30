@@ -4,7 +4,7 @@ import android.os.Bundle
 import com.obcompany.androidjetpack.databinding.FragmentExampleBinding
 import com.obcompany.androidjetpack.utility.DialogUtil
 import android.view.*
-import com.obcompany.androidjetpack.app.ui.BaseFragment
+import com.obcompany.androidjetpack.utility.base.BaseFragment
 
 class ExampleFragment: BaseFragment(), View.OnClickListener{
     private lateinit var binding: FragmentExampleBinding

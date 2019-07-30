@@ -15,13 +15,14 @@
             android:usesCleartextTraffic="true"
             tools:ignore="UnusedAttribute">
 
-        <activity android:name=".app.MainActivity"
+        <activity android:name="com.obcompany.androidjetpack.app.MainActivity"
                   android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
-                <action android:name="android.intent.action.VIEW" />
-                <action android:name="android.intent.action.MAIN"/>
-                <category android:name="android.intent.category.LAUNCHER"/>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+            <nav-graph android:value="@navigation/navigation"/>
         </activity>
     </application>
 
